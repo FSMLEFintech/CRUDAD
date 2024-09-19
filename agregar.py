@@ -1,11 +1,23 @@
 from database import conectar
 
-def agregar_curso(codigo, nombre, creditos):
+# Función para agregar un cliente (que ya tienes)
+def agregar_cliente(nombre, direccion, telefono, orden):
     conn = conectar()
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO cursos (codigo, nombre, creditos)
+        INSERT INTO clientes (nombre, direccion, telefono, orden)
+        VALUES (?, ?, ?, ?)
+    ''', (nombre, direccion, telefono, orden))
+    conn.commit()
+    conn.close()
+
+# Función para agregar un empleado
+def agregar_empleado(nombre, puesto, salario):
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO empleados (nombre, puesto, salario)
         VALUES (?, ?, ?)
-    ''', (codigo, nombre, creditos))
+    ''', (nombre, puesto, salario))
     conn.commit()
     conn.close()
